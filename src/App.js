@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Expense } from "./expense";
 import { MembersList } from "./members-list";
+import axios from "axios";
 
 const expenses = [
   {
@@ -38,13 +39,30 @@ const expenses = [
 
 const groupName = "Stardust Crusaders";
 
+const members = [
+  {
+    username: "LORDBABUINO",
+    pubkey: "npub14jvgryts4c0xtkux29xy402lmezdrfh62jxl3jpdqwjfe2z7884q62pa0y",
+  },
+];
+
+async function fetchNostrData(npub) {
+  const { data: nostrData } = await axios.get(`https://nostrhttp.com/${npub}`);
+  return {
+    displayName: JSON.parse(nostrData.profileEvent.content).displayName,
+  };
+}
+
 function App() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleSave = () => {
-    console.log("Saving");
+  const handleSave = async () => {
+    fetchNostrData(
+      "npub1xhuqhkhrsgdgxwf4lfpuf0wyr560l8jkjhm2u0amxhgdysrg2hqqerjfcd",
+    );
+    handleClose();
   };
 
   return (
