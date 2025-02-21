@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Expense } from "./expense";
+import { MembersList } from "./members-list";
 
 const expenses = [
   {
@@ -37,13 +39,25 @@ const expenses = [
 const groupName = "Stardust Crusaders";
 
 function App() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleSave = () => {
+    console.log("Saving");
+  };
+
   return (
     <div className="App">
       <Container className="master-container">
         <Container className="header">
           <Container className="group-name">Group: {groupName}</Container>
           <Container className="button-group">
-            <Button variant="primary" style={{ marginRight: "5px" }}>
+            <Button
+              variant="primary"
+              style={{ marginRight: "5px" }}
+              onClick={handleShow}
+            >
               add members
             </Button>
             <Button variant="danger">add expense</Button>
@@ -53,6 +67,11 @@ function App() {
           <Expense {...expense} key={index} />
         ))}
       </Container>
+      <MembersList
+        show={show}
+        handleClose={handleClose}
+        handleSave={handleSave}
+      />
     </div>
   );
 }
