@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+#root,
+body,
+.App,
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +43,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  margin: 48px 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
