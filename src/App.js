@@ -34,13 +34,20 @@ const expenses = [
   },
 ];
 
+const groupName = "Stardust Crusaders";
+
 function App() {
   return (
     <div className="App">
-      <Container>
+      <Container className="master-container">
         <Container className="header">
-          <Button variant="primary">add members</Button>
-          <Button variant="danger">add expense</Button>
+          <Container className="group-name">Group: {groupName}</Container>
+          <Container className="button-group">
+            <Button variant="primary" style={{ marginRight: "5px" }}>
+              add members
+            </Button>
+            <Button variant="danger">add expense</Button>
+          </Container>
         </Container>
         {expenses.map((expense, index) => (
           <Expense {...expense} key={index} />

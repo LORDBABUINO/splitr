@@ -45,12 +45,26 @@ html {
   }
 }
 
-.container {
-  margin: 48px 0;
+.master-container {
+  margin: 48px auto;
 }
 
 .header {
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  padding: 0;
+}
+
+.group-name {
+  text-align: start;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0;
+}
+
+.button-group {
+  display: flex;
   justify-content: flex-end;
+  padding: 0;
 }
