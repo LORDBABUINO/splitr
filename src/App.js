@@ -70,7 +70,17 @@ function App() {
     <div className="App">
       <Container className="master-container">
         <Container className="header">
-          <Container className="group-name">Group: {groupName}</Container>
+          <Container className="group-info">
+            <span className="group-name">{`Group: ${groupName}`}</span>
+            <Container className="member-list">
+              {members.map((member, index) => (
+                <span
+                  className="member-name"
+                  key={index}
+                >{`• ${member.displayName}`}</span>
+              ))}
+            </Container>
+          </Container>
           <Container className="button-group">
             <Button
               variant="primary"
