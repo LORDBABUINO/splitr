@@ -41,27 +41,28 @@ const groupName = "Stardust Crusaders";
 
 const members = [
   {
-    username: "LORDBABUINO",
-    pubkey: "npub14jvgryts4c0xtkux29xy402lmezdrfh62jxl3jpdqwjfe2z7884q62pa0y",
+    displayName: "LORDBABUINO",
+    npubkey: "npub14jvgryts4c0xtkux29xy402lmezdrfh62jxl3jpdqwjfe2z7884q62pa0y",
   },
 ];
 
 async function fetchNostrData(npub) {
   const { data: nostrData } = await axios.get(`https://nostrhttp.com/${npub}`);
   return {
-    displayName: JSON.parse(nostrData.profileEvent.content).displayName,
+    displayName: JSON.parse(nostrData.profileEvent.content).display_name,
   };
 }
 
 function App() {
   const [show, setShow] = useState(false);
+  const [npubKey, setNpubKey] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSave = async () => {
-    fetchNostrData(
-      "npub1xhuqhkhrsgdgxwf4lfpuf0wyr560l8jkjhm2u0amxhgdysrg2hqqerjfcd",
-    );
+    const nostrData = await fetchNostrData(npubKey.trim());
+    members.push({ ...nostrData, npubKey });
+    console.log({ members });
     handleClose();
   };
 
@@ -89,6 +90,8 @@ function App() {
         show={show}
         handleClose={handleClose}
         handleSave={handleSave}
+        npubKey={npubKey}
+        handleInputChange={({ target }) => setNpubKey(target.value)}
       />
     </div>
   );
