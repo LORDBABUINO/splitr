@@ -5,6 +5,7 @@ import "./App.css";
 import { Expense } from "./expense";
 import { MembersList } from "./members-list";
 import axios from "axios";
+import { AddExpense } from "./add-expense";
 
 const expenses = [
   {
@@ -54,16 +55,32 @@ async function fetchNostrData(npub) {
 }
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [showMembers, setShowMembers] = useState(false);
+  const [showExpenses, setShowExpenses] = useState(false);
   const [npubKey, setNpubKey] = useState("");
+  const [expense, setExpense] = useState("");
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handleSave = async () => {
+  const handleCloseMembers = () => setShowMembers(false);
+  const handleShowMembers = () => setShowMembers(true);
+  const handleSaveMembers = async () => {
     const nostrData = await fetchNostrData(npubKey.trim());
     members.push({ ...nostrData, npubKey });
-    console.log({ members });
-    handleClose();
+    handleCloseMembers();
+  };
+
+  const handleCloseExpense = () => setShowExpenses(false);
+  const handleShowExpense = () => setShowExpenses(true);
+  const handleSaveExpense = (refDescription, refCost, refPayer) => (e) => {
+    e.preventDefault();
+    const cost = refCost.current.value.trim();
+    expenses.push({
+      date: new Date().toISOString(),
+      description: refDescription.current.value.trim(),
+      cost,
+      payer: refPayer.current.value.trim(),
+      splitedValue: Number(cost) / members.length,
+    });
+    handleCloseExpense();
   };
 
   return (
@@ -85,11 +102,13 @@ function App() {
             <Button
               variant="primary"
               style={{ marginRight: "5px" }}
-              onClick={handleShow}
+              onClick={handleShowMembers}
             >
               add members
             </Button>
-            <Button variant="danger">add expense</Button>
+            <Button variant="danger" onClick={handleShowExpense}>
+              add expense
+            </Button>
           </Container>
         </Container>
         {expenses.map((expense, index) => (
@@ -97,11 +116,16 @@ function App() {
         ))}
       </Container>
       <MembersList
-        show={show}
-        handleClose={handleClose}
-        handleSave={handleSave}
+        handleClose={handleCloseMembers}
+        show={showMembers}
+        handleSave={handleSaveMembers}
         npubKey={npubKey}
         handleInputChange={({ target }) => setNpubKey(target.value)}
+      />
+      <AddExpense
+        show={showExpenses}
+        handleClose={handleCloseExpense}
+        handleSave={handleSaveExpense}
       />
     </div>
   );
