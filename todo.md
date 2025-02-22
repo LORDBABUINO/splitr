@@ -9,11 +9,11 @@
 
 ## Screens
 
-- [ ] group
+- [x] group
   - [x] button to add new participants
   - [x] list expenses
   - [x] button to add new expenses
-  - [ ] button to settle up group
+  - [x] button to settle up group
   - [x] group name
   - [x] list participants
 - [x] add participants modal
