@@ -11,30 +11,23 @@ const expenses = [
   {
     date: "2025-02-21T19:06:47.076Z",
     cost: 20,
-    description: "redbull",
-    payer: "herberson",
+    description: "Red Bull",
+    payer: "Breno Brito",
     splitedValue: 10,
   },
   {
-    date: "2025-02-21T19:06:47.076Z",
-    cost: 20,
-    description: "redbull",
-    payer: "herberson",
-    splitedValue: 10,
+    date: "2025-02-22T11:30:00.000Z",
+    cost: 35,
+    description: "Lunch",
+    payer: "LORDBABUINO",
+    splitedValue: 17.5,
   },
   {
-    date: "2025-02-21T19:06:47.076Z",
-    cost: 20,
-    description: "redbull",
-    payer: "herberson",
-    splitedValue: 10,
-  },
-  {
-    date: "2025-02-21T19:06:47.076Z",
-    cost: 20,
-    description: "redbull",
-    payer: "herberson",
-    splitedValue: 10,
+    date: "2025-02-23T09:15:00.000Z",
+    cost: 10,
+    description: "Coffee",
+    payer: "luisschwab",
+    splitedValue: 5,
   },
 ];
 
@@ -43,7 +36,15 @@ const groupName = "Stardust Crusaders";
 const members = [
   {
     displayName: "LORDBABUINO",
-    npubkey: "npub14jvgryts4c0xtkux29xy402lmezdrfh62jxl3jpdqwjfe2z7884q62pa0y",
+    npubkey: "npub1dkpmrtcuqlngclt27ftd8yec3vrmmxsehkvq2l6uns64w4q656rqapwlwd",
+  },
+  {
+    displayName: "Breno Brito",
+    npubkey: "npub1v22qyndskpawjnsjn8zce53nwldza5ejw67f8y33ntt8qlmpm5rq7ra0z2",
+  },
+  {
+    displayName: "luisschwab",
+    npubkey: "npub1d2x9c0e5gwwg6ask88c87y4v425fh4wz3hwhskvcwzpzdn7dzg5sl4eu8n",
   },
 ];
 
@@ -57,8 +58,8 @@ async function fetchNostrData(npub) {
 function App() {
   const [showMembers, setShowMembers] = useState(false);
   const [showExpenses, setShowExpenses] = useState(false);
+  const [showSettleUp, setShowSettleUp] = useState(false);
   const [npubKey, setNpubKey] = useState("");
-  const [expense, setExpense] = useState("");
 
   const handleCloseMembers = () => setShowMembers(false);
   const handleShowMembers = () => setShowMembers(true);
@@ -83,6 +84,10 @@ function App() {
     handleCloseExpense();
   };
 
+  const handleCloseSettleUp = () => setShowSettleUp(false);
+  const handleShowSettleUp = () => setShowSettleUp(true);
+  const handleSaveSettleUp = (e) => {};
+
   return (
     <div className="App">
       <Container className="master-container">
@@ -104,10 +109,17 @@ function App() {
               style={{ marginRight: "5px" }}
               onClick={handleShowMembers}
             >
-              add members
+              Add members
             </Button>
-            <Button variant="danger" onClick={handleShowExpense}>
-              add expense
+            <Button
+              variant="danger"
+              style={{ marginRight: "5px" }}
+              onClick={handleShowExpense}
+            >
+              Add expense
+            </Button>
+            <Button variant="success" onClick={handleShowSettleUp}>
+              Settle up
             </Button>
           </Container>
         </Container>
