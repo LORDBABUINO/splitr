@@ -10,21 +10,21 @@ import { AddExpense } from "./add-expense";
 const expenses = [
   {
     date: "2025-02-21T19:06:47.076Z",
-    cost: 20,
+    cost: 30,
     description: "Red Bull",
     payer: "Breno Brito",
     splitedValue: 10,
   },
   {
     date: "2025-02-22T11:30:00.000Z",
-    cost: 35,
+    cost: 52.5,
     description: "Lunch",
     payer: "LORDBABUINO",
     splitedValue: 17.5,
   },
   {
     date: "2025-02-23T09:15:00.000Z",
-    cost: 10,
+    cost: 15,
     description: "Coffee",
     payer: "luisschwab",
     splitedValue: 5,
